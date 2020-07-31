@@ -45,5 +45,5 @@ jupyter notebook
 
 ### Contributors
 
-<a href = "https://github.com/nickinack"> Karthik Viswanathan </a>
+<a href = "https://github.com/nickinack">Karthik Viswanathan</a>
 
