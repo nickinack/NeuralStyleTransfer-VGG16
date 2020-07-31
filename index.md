@@ -1,37 +1,49 @@
-## Welcome to GitHub Pages
+# Neural Style transfer using VGG-16 CNN
 
-You can use the [editor on GitHub](https://github.com/nickinack/NeuralStyleTransfer-VGG16/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+### About
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Implementation of <a href = "https://arxiv.org/abs/1508.06576"> A Neural Algorithm of Artistic Style </a> by <b> Leon A. Gatys, Alexander S. Ecker, Matthias Bethge </b> . This rendition has been done using a VGG-16 neural network. Keras and Tensorflow has been used along with Scipy <i>Fmin_l_bfgs_b optimizer</i>.
 
-### Markdown
+### Modifications
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Instead of using a random noise initializer for the input image, the existing content image's values are copied to the input image. Styling weights are customizable depending upon the user specifications.
 
-```markdown
-Syntax highlighted code block
+### Libraries
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```bash
+keras==2.3.1
+tensorflow==1.15.3
+scipy==1.4.1
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### Algorithm
 
-### Jekyll Themes
+The styling, content and the output tensors are stacked up as the input image. This tensor passes into the VGG-16 and the output is also a <b>3xheightxwidthx3</b> tensor. The third tensor in the output layer (<i>Generated Image</i>) accounts for the smoothness. The activations in the <i>5th Convolutional block's <b>conv_2</b></i> is used to calculate content cost and various other convolutional layers belonging to each block is used to calculate style cost. Here , the regularization factor used for styling is primarily higher than the others. Image has been saved after deprocessing and reverting the effects brought by the VGG-16 passage.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/nickinack/NeuralStyleTransfer-VGG16/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+### Running Instructions
+To execute and run these files, download and open them in your Jupyter lab/ Jupyter notebook
 
-### Support or Contact
+If you do not have jupyter notebook/lab, download them using the following code :
+```bash
+pip install jupyterlab
+```
+```bash
+pip install notebook
+```
+After installing , you may open your notebooks using the following command:
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+```bash
+jupyter lab
+```
+```bash
+jupyter notebook
+```
+
+### NOTE
+
+<b> Please note that since my system couldn't handle any image size greater thatn 400x400x3 to pass into VGG, I have implemented this only for 128x196x3. If required, please set the image size to appropriate dimensions and train the network. </b>
+
+### Contributors
+
+<a href = "https://github.com/nickinack">Karthik Viswanathan</a>
+
